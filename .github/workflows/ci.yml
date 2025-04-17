@@ -8,16 +8,17 @@ jobs:
     name: hello
     runs-on: ubuntu-latest
     steps:
-      - name: Check TypeScript and Lint
+      - name: Set up Dagger
         uses: dagger/dagger-for-github@8.0.0
         with:
           version: 'latest'
-          run: container |
-            from node:latest |
-            with-exec -- npm install -g pnpm@latest |
-            with-directory /src . --exclude node_modules |
-            with-workdir /src |
-            with-exec pnpm install |
-            with-exec -- pnpm run ts:check |
-            with-exec -- pnpm run lint |
-          shell: dagger {0}
+      - name: Check TypeScript and Lint
+        run: container |
+          from node:latest |
+          with-exec -- npm install -g pnpm@latest |
+          with-directory /src . --exclude node_modules |
+          with-workdir /src |
+          with-exec pnpm install |
+          with-exec -- pnpm run ts:check |
+          with-exec -- pnpm run lint |
+        shell: dagger {0}
