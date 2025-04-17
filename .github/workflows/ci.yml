@@ -11,7 +11,7 @@ jobs:
       - name: Set up Dagger
         uses: dagger/dagger-for-github@8.0.0
         with:
-          version: 'v0.18.2'
+          version: 'latest'
       - name: Check TypeScript and Lint
         run: container |
           from node:latest |
@@ -20,5 +20,5 @@ jobs:
           with-workdir /src |
           with-exec pnpm install |
           with-exec -- pnpm run ts:check |
-          with-exec -- pnpm run lint |
+          with-exec -- pnpm run lint
         shell: dagger {0}
