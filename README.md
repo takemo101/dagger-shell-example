@@ -39,9 +39,9 @@ container |
     with-exec -- pnpm run lint
 ```
 
-### pnpmのバージョン確認
+### コンテナのターミナルを起動する
 
-以下のDagger Shellを実行するとpnpmのバージョンが出力されます。
+以下のDagger Shellを実行するとコンテナのターミナルが起動しコマンド操作ができます。
 
 ```sh
 container |
@@ -49,7 +49,6 @@ container |
     with-exec -- npm install -g pnpm@latest |
     with-directory /src . --exclude node_modules | # node_modulesは除外する
     with-workdir /src |
-    with-exec pnpm install |
-    with-exec -- pnpm --version |
-    stdout
+    with-exec -- pnpm install --frozen-lockfile |
+    terminal
 ```
