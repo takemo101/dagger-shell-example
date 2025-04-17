@@ -1,4 +1,4 @@
-name: dagger
+name: dagger-ci
 on:
   push:
     branches: [main]
@@ -20,8 +20,6 @@ jobs:
           with-exec -- npm install -g pnpm@latest |
           with-directory /src . --exclude node_modules |
           with-workdir /src |
-          with-exec -- ls -l |
-          with-exec -- pnpm --version |
           with-exec -- pnpm install --frozen-lockfile |
           with-exec -- pnpm run ts:check |
           with-exec -- pnpm run lint

@@ -17,7 +17,7 @@ container |
     with-exec -- npm install -g pnpm@latest |
     with-directory /src . --exclude node_modules | # node_modulesは除外する
     with-workdir /src |
-    with-exec pnpm install |
+    with-exec -- pnpm install --frozen-lockfile |
     with-exec pnpm run build |
     directory ./dist |
     export ./dist
@@ -34,7 +34,7 @@ container |
     with-directory /src . --exclude node_modules | # node_modulesは除外する
     with-workdir /src |
     with-exec -- ls -l |
-    with-exec pnpm install |
+    with-exec -- pnpm install --frozen-lockfile |
     with-exec -- pnpm run ts:check |
     with-exec -- pnpm run lint
 ```
