@@ -18,6 +18,7 @@ jobs:
           with-exec -- npm install -g pnpm@latest |
           with-directory /src . --exclude node_modules |
           with-workdir /src |
+          with-exec -- ls -l |
           with-exec -- pnpm --version |
           with-exec -- pnpm install --frozen-lockfile |
           with-exec -- pnpm run ts:check |
