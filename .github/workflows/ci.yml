@@ -19,7 +19,7 @@ jobs:
           with-directory /src . --exclude node_modules |
           with-workdir /src |
           with-exec -- pnpm --version |
-          with-exec pnpm install |
+          with-exec -- pnpm install --frozen-lockfile |
           with-exec -- pnpm run ts:check |
           with-exec -- pnpm run lint
         shell: dagger {0}
