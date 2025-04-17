@@ -13,13 +13,17 @@ jobs:
         with:
           version: 'latest'
           verb: shell
-          args: container |
-            from node:latest |
-            with-exec -- npm install -g pnpm@latest |
-            with-directory /src . --exclude node_modules |
-            with-workdir /src |
-            with-exec -- ls -l |
-            with-exec -- pnpm --version |
-            with-exec -- pnpm install --frozen-lockfile |
-            with-exec -- pnpm run ts:check |
-            with-exec -- pnpm run lint
+      - name: ls
+        run: ls -l
+      - name: Check TypeScript and Lint
+        run: container |
+          from node:latest |
+          with-exec -- npm install -g pnpm@latest |
+          with-directory /src . --exclude node_modules |
+          with-workdir /src |
+          with-exec -- ls -l |
+          with-exec -- pnpm --version |
+          with-exec -- pnpm install --frozen-lockfile |
+          with-exec -- pnpm run ts:check |
+          with-exec -- pnpm run lint
+        shell: dagger {0}
